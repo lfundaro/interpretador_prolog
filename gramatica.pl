@@ -23,6 +23,17 @@ relacion(fem,plu) --> ['tias'].
 relacion(fem,plu) --> ['hermanas'].
 relacion(fem,plu) --> ['hijas'].
 
+relacioncomp --> [].
+relacioncomp --> rel1(S,D), relacion(S,D).
+
+
+rel1(masc,sing) --> ['del'].
+rel1(masc,plu) --> ['de'],['los'].
+rel1(fem,sing) --> ['de']['la'].
+rel1(fem,plu) --> ['de'],['las'].
+
+
+
 verbo(sing) --> ['es'].
 verbo(plu) --> ['son'].
 
@@ -37,7 +48,11 @@ pregunta --> preguntaquien.
 pregunta --> preguntaesvrd.
 
 % Quien(es) es(son) articulo relacion de persona.
-preguntaquien --> preg(D), verbo(D), articulo(S,D), relacion(S,D), ['de'], persona.
+preguntaquien --> ['¿'],preg(D), verbo(D), articulo(S,D), relacioncomp, ['de'], persona, ['?'].
 
-preguntaesvrd --> ['es'], ['verdad'], ['que'], persona, verbo(D), relacion(S,D), ['de'], persona. 
+% Es verdad que persona es relacion de persona.
+preguntaesvrd --> ['¿'],['es'], ['verdad'], ['que'], persona, verbo(D), relacioncomp, ['de'], persona, ['?'].
+
+
+%relacion(S,D) 
 
