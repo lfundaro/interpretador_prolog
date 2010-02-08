@@ -59,7 +59,7 @@ persona(masculino) --> [antonio].
 persona(femenino) --> [marion].
 
 %No puedo hacer simbolo ¿ en consola
-%pregunta --> [¿] , pronom(N) , verbo(N) , articulo(N,G) , relacion(N,G) , [?].
+%pregunta --> [¿] , pronom(N) , verbo(N) , articulo(N,G) , relacion(N,G,X,Y) , [?] {write(Y)}.
 
 %%Pregunta sin relacion recursiva
 pregunta --> pronom(N) , verbo(N) , articulo(N,G) , relacion(N,G) , prepos_senc , persona(G2) , [?].
