@@ -36,7 +36,10 @@ esposo(richard,ana).
 esposo(hyatt,lis).
 esposo(arturo,maria).
 
+
 esposa(X,Y) :- esposo(Y,X).
+
+persona(X) :- persona(X,masc) ; persona(X,fem).
 
 hermano(X,Y) :- persona(X,masc),((madre(Z,X), madre(Z,Y)) ; (padre(Z,X), padre(Z,Y))), X \= Y, !.
 
@@ -48,11 +51,15 @@ hermanas(X,Y) :- persona(X,fem), hermana(X,Y).
 
 hermana(X,Y) :- persona(X,fem),((madre(Z,X), madre(Z,Y)) ; (padre(Z,X), padre(Z,Y))), X \= Y.
 
+%%hermanos(X,Y) :- (madre(Z,X), madre(Z,Y)); (padre(Z,X), padre(Z,Y)), X \= Y.
+
 abuelo(X,Y) :- persona(X,masc), padre(X,Z), (padre(Z,Y); madre(Z,Y)).
 
 %abuelos(X,Y) :- persona(X,masc), padre(X,Z), padre(Z,Y), padre(X,W), madre(W,Y).
 
 abuela(X,Y) :- persona(X,fem), madre(X,Z), (padre(Z,Y); madre(Z,Y)).
+
+abuelos(X,Y) :- abuelo(X,Y), abuela(X,Y).
 
 hijo(X,Y) :- persona(X,masc),(padre(Y,X); madre(Y,X)).
 
