@@ -87,18 +87,19 @@ persona(X) --> [X].
 
 %%Pregunta con relacion recursiva
 
+% Quien es
+pregunta --> pronom(N) , verbo(N) , articulo(N,G) , terminal(N,G,_X,Y), {write(Y)}.
 
-pregunta --> pronom(N) , verbo(N) , articulo(N,G) , terminal(N,G,X,Y), {write(Y)}.
-%pregunta --> es_verdad, persona(X), verbo(N), articulo(N,G),terminal(N,G,X,Y), {write(Y)}.
+% Es verdad
+pregunta --> es_verdad, persona(Y), verbo(N), articulo(N,G),terminal(N,G,_X,Y).
 
+% Forma sencilla
 terminal(N,G,X,Y) --> relacion(N,G,X,Y), prepos_senc , persona(X) , [?].
+
+% Forma recursiva 
 terminal(N,G,X,Y) --> relacion(N,G,W,Y) , prepos_art(Nu,Ge), terminal(Nu,Ge,X,W).
 
 
-%terminal2(N,G,X,Y) --> relacion(N,G,X,Y),prepos_senc,persona(X),[?].
-%terminal2(N,G,X,Y) --> relacion(N,G,X,Y),prepos_art(Nu,Ge),terminal2(Nu,Ge,X,W).
-
-%rela_rec(N,G,X,Y,[A|B]) --> prepost_art(N,G), relacion(N,G,W,Y,A), terminal(Nu,Ge,X,W,B).
 
 
 
