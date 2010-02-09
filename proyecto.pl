@@ -31,19 +31,26 @@ madre(flora,maria).
 madre(flora,ana).
 
 
+
 esposo(richard,ana).
 esposo(hyatt,lis).
 esposo(arturo,maria).
 
-
-
 esposa(X,Y) :- esposo(Y,X).
 
-hermano(X,Y) :- persona(X,masc),((madre(Z,X), madre(Z,Y)) ; (padre(Z,X), padre(Z,Y))), X \= Y.
+hermano(X,Y) :- persona(X,masc),((madre(Z,X), madre(Z,Y)) ; (padre(Z,X), padre(Z,Y))), X \= Y, !.
+
+hermanos(X,Y) :- hermano_plu(X,Y).
+
+hermano_plu(X,Y) :- persona(X,masc),(madre(Z,X), madre(Z,Y)), X \= Y. % ; (padre(Z,X), padre(Z,Y))), X \= Y.
+
+hermanas(X,Y) :- persona(X,fem), hermana(X,Y).
 
 hermana(X,Y) :- persona(X,fem),((madre(Z,X), madre(Z,Y)) ; (padre(Z,X), padre(Z,Y))), X \= Y.
 
 abuelo(X,Y) :- persona(X,masc), padre(X,Z), (padre(Z,Y); madre(Z,Y)).
+
+%abuelos(X,Y) :- persona(X,masc), padre(X,Z), padre(Z,Y), padre(X,W), madre(W,Y).
 
 abuela(X,Y) :- persona(X,fem), madre(X,Z), (padre(Z,Y); madre(Z,Y)).
 

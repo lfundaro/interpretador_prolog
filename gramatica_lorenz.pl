@@ -1,4 +1,3 @@
-
 pronom(singular) --> [quien].
 pronom(plural) --> [quienes].
 es_verdad --> [es],[verdad],[que].
@@ -12,7 +11,7 @@ articulo(plural,masculino) --> [los].
 relacion(singular,femenino) --> [esposa].
 relacion(singular,femenino) --> [abuela].
 relacion(singular,femenino) --> [madre].
-relacion(singular,femenino) --> [hija].
+relacion(singular,femenino,X,Y,hija(X,Y)) --> [hija].
 relacion(singular,femenino) --> [nieta].
 relacion(singular,femenino) --> [hermana].
 relacion(singular,femenino) --> [tia].
@@ -28,7 +27,7 @@ relacion(plural,femenino) --> [tias].
 relacion(plural,femenino) --> [sobrinas].
 relacion(plural,femenino) --> [cunadas].
 
-relacion(singular,masculino) --> [esposo].
+relacion(singular,masculino) --> [esposo]. 
 relacion(singular,masculino) --> [abuelo].
 relacion(singular,masculino) --> [padre].
 relacion(singular,masculino) --> [hijo].
@@ -62,18 +61,14 @@ persona(femenino) --> [marion].
 %pregunta --> [¿] , pronom(N) , verbo(N) , articulo(N,G) , relacion(N,G) , [?].
 
 %%Pregunta sin relacion recursiva
-pregunta --> pronom(N) , verbo(N) , articulo(N,G) , relacion(N,G) , prepos_senc , persona(G2) , [?].
+pregunta --> pronom(N) , verbo(N) , articulo(N,G) , relacion(N,G) , prepos_senc , persona(_) , [?].
 
 %%Pregunta con relacion recursiva
-pregunta --> pronom(N) , verbo(N) , articulo(N,G) , relacion(N,G) , relacion_rec , persona(G2) , [?] .
+pregunta --> pronom(N) , verbo(N) , articulo(N,G) , relacion(N,G,_,) , relacion_rec , persona(_,G) , [?], {(_,}.
 
 pregunta --> es_verdad,persona(G) , verbo(N) , articulo(N,G) , relacion(N,G) , [de] , persona(G) , [?].
 
-%% Pregunta con es_verdad con recursion
-%% Hace falta agregar genero a persona para hacer corresponder el 
-%% genero del articulo con la persona
-%% (LISTO!!)
-pregunta --> es_verdad , persona(Gen) , verbo(Num) , articulo(Num,Gen) , relacion(Num,Gen) , relacion_rec , persona(Gen2) , [?].
+pregunta --> es_verdad , persona(Gen) , verbo(Num) , articulo(Num,Gen) , relacion(Num,Gen) , relacion_rec , persona(_) , [?].
 
 relacion_rec --> prepos_art(Num2,Gen2) , relacion(Num2,Gen2) , relacion_rec.
 
