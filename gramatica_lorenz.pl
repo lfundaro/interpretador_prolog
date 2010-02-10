@@ -61,6 +61,38 @@ relacion(singular,femenino,X,Y) --> [sobrina],{sobrina(Y,X)}.
 relacion(singular,femenino,X,Y) --> [suegra],{suegra(Y,X)}.
 relacion(singular,femenino,X,Y) --> [cunada],{cunada(Y,X)}.
 
+relacion(plural,femenino,X,Y) --> [abuelas],{abuelas(Y,X)}.
+relacion(plural,femenino,X,Y) --> [hijas],{hijas(Y,X)}.
+relacion(plural,femenino,X,Y) --> [nietas],{nietas(Y,X)}.
+relacion(plural,femenino,X,Y) --> [hermanas],{hermanas(Y,X)}.
+relacion(plural,femenino,X,Y) --> [tias],{tias(Y,X)}.
+relacion(plural,femenino,X,Y) --> [sobrinas],{sobrinas(Y,X)}.
+relacion(plural,femenino,X,Y) --> [cunadas],{cunadas(Y,X)}.
+
+
+relacion(singular,masculino,X,Y) --> [esposo],{esposo(Y,X)}.
+relacion(singular,masculino,X,Y) --> [abuelo],{abuelo(Y,X)}.
+relacion(singular,masculino,X,Y) --> [padre],{padre(Y,X)}.
+relacion(singular,masculino,X,Y) --> [hijo],{hijo(Y,X)}.
+relacion(singular,masculino,X,Y) --> [nieto],{nieto(Y,X)}.
+relacion(singular,masculino,X,Y) --> [hermano],{hermano(Y,X)}.
+relacion(singular,masculino,X,Y) --> [tio],{tio(Y,X)}.
+relacion(singular,masculino,X,Y) --> [sobrino],{sobrino(Y,X)}.
+relacion(singular,masculino,X,Y) --> [suegro],{suegro(Y,X)}.
+relacion(singular,masculino,X,Y) --> [cunado],{cunado(Y,X)}.
+
+relacion(plural,masculino,X,Y) --> [abuelos],{abuelos(Y,X)}.
+relacion(plural,masculino,X,Y) --> [hijos],{hijos(Y,X)}.
+relacion(plural,masculino,X,Y) --> [nietos],{nietos(Y,X)}.
+relacion(plural,masculino,X,Y) --> [hermanos],{hermanos(Y,X)}.
+relacion(plural,masculino,X,Y) --> [tios],{tios(Y,X)}.
+relacion(plural,masculino,X,Y) --> [sobrinos],{sobrinos(Y,X)}.
+%%Preguntar este caso
+relacion(plural,masculino,X,Y) --> [suegros],{suegros(Y,X)}.
+relacion(plural,masculino,X,Y) --> [cunados],{cunados(Y,X)}.
+
+
+
 
 %RELACIONES USANDO LISTAS
 %relacion(singular,femenino,X,Y,esEsposa(Y,X)) --> [esposa], {esposa(Y,X)}.
@@ -84,16 +116,6 @@ relacion(singular,femenino,X,Y) --> [cunada],{cunada(Y,X)}.
 %relacion(plural,femenino,X,Y,sonSobrinas(Y,X)) --> [sobrinas],{hermano(Y,X)}.
 %relacion(plural,femenino,X,Y,sonCunadas(Y,X)) --> [cunadas],{hermano(Y,X)}.
 
-relacion(singular,masculino,X,Y) --> [esposo],{esposo(Y,X)}.
-relacion(singular,masculino,X,Y) --> [abuelo],{abuelo(Y,X)}.
-relacion(singular,masculino,X,Y) --> [padre],{padre(Y,X)}.
-relacion(singular,masculino,X,Y) --> [hijo],{hijo(Y,X)}.
-relacion(singular,masculino,X,Y) --> [nieto],{nieto(Y,X)}.
-relacion(singular,masculino,X,Y) --> [hermano],{hermano(Y,X)}.
-relacion(singular,masculino,X,Y) --> [tio],{tio(Y,X)}.
-relacion(singular,masculino,X,Y) --> [sobrino],{sobrino(Y,X)}.
-relacion(singular,masculino,X,Y) --> [suegro],{suegro(Y,X)}.
-relacion(singular,masculino,X,Y) --> [cunado],{cunado(Y,X)}.
 
 %RELACIONES USANDO LISTAS
 %relacion(singular,masculino,X,Y,esAbuelo(Y,X)) --> [abuelo],{abuelo(Y,X)}.
