@@ -11,6 +11,7 @@ persona(alex,masc).
 persona(flora,fem).
 persona(antonio,masc).
 persona(lis,fem).
+persona(lili,masc).
 
 padre(richard,alex).
 padre(richard,cris).
@@ -27,6 +28,7 @@ madre(ana,hyatt).
 madre(maria,marion).
 madre(maria,martin).
 madre(maria,marcel).
+madre(maria,lili).
 madre(flora,maria).
 madre(flora,ana).
 
@@ -39,11 +41,9 @@ persona(X) :- persona(X,masc) ; persona(X,fem).
 
 esposa(X,Y) :- esposo(Y,X).
 
-hermano(X,Y) :- persona(X,masc),((madre(Z,X), madre(Z,Y)) ; (padre(Z,X), padre(Z,Y))), X \= Y.
+hermano(X,Y) :- persona(X,masc),(((madre(Z,X), madre(Z,Y)) , (padre(W,X), padre(W,Y))) ; ((madre(Z,X),madre(Z,Y)), \+ (padre(W,X), padre(W,Y))); ((padre(W,X),padre(W,Y)) , \+ (madre(Z,X),madre(Z,Y)))), X \= Y.
 
 hermana(X,Y) :- persona(X,fem),((madre(Z,X), madre(Z,Y)) ; (padre(Z,X), padre(Z,Y))), X \= Y.
-
-hermanos(X,Y) :- (madre(Z,X), madre(Z,Y)); (padre(Z,X), padre(Z,Y)), X \= Y.
 
 abuelo(X,Y) :- persona(X,masc), padre(X,Z), (padre(Z,Y); madre(Z,Y)).
 

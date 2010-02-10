@@ -69,7 +69,7 @@ relacion(singular,masculino,X,Y) --> [cunado],{cunado(Y,X)}.
 % relacion(plural,masculino,X,Y) --> [abuelos],{abuelo(Y,X)}.
 % relacion(plural,masculino,X,Y) --> [hijos],{hijo(Y,X)}.
 % relacion(plural,masculino,X,Y) --> [nietos],{nieto(Y,X)}.
-% relacion(plural,masculino,X,Y) --> [hermanos],{hermano(Y,X)}.
+relacion(plural,masculino,X,Y) --> [hermanos],{hermano(Y,X)}.
 % relacion(plural,masculino,X,Y) --> [tios],{hermano(Y,X)}.
 % relacion(plural,masculino,X,Y) --> [sobrinos],{hermano(Y,X)}.
 % Preguntar este caso
@@ -88,7 +88,7 @@ persona(X) --> [X].
 %%Pregunta con relacion recursiva
 
 % Quien es
-pregunta --> pronom(N) , verbo(N) , articulo(N,G) , terminal(N,G,_X,Y), {write(Y)}.
+pregunta --> pronom(N) , verbo(N) , articulo(N,G) , terminal(N,G,_X,Y), {write(Y),nl,fail}.
 
 % Es verdad
 pregunta --> es_verdad, persona(Y), verbo(N), articulo(N,G),terminal(N,G,_X,Y).
