@@ -11,12 +11,8 @@ persona(alex,masc).
 persona(flora,fem).
 persona(antonio,masc).
 persona(lis,fem).
-<<<<<<< HEAD
 persona(lili,masc).
 
-=======
- 
->>>>>>> 745fe62c4c792e31f9269c5561d846213bbd8011
 padre(richard,alex).
 padre(richard,cris).
 padre(richard,hyatt).
@@ -45,7 +41,7 @@ esposa(X,Y) :- esposo(Y,X).
 
 persona(X) :- persona(X,masc) ; persona(X,fem).
 
-hermano(X,Y) :- persona(X,masc),((madre(Z,X), madre(Z,Y)) ; (padre(Z,X), padre(Z,Y))), X \= Y, !.
+hermano(X,Y) :- persona(X,masc),((madre(Z,X), madre(Z,Y)) ; (padre(Z,X), padre(Z,Y))), X \= Y.
 
 hermana(X,Y) :- persona(X,fem),((madre(Z,X), madre(Z,Y)) ; (padre(Z,X), padre(Z,Y))), X \= Y, !.
 
@@ -77,11 +73,9 @@ nieta(X,Y) :- hija(X,Z), (hijo(Z,Y); hija(Z,Y)).
 
 nietas(X,Y) :- padre(Y,Z);madre(Y,Z), hijas(X,Z).
 
-tio(X,Y) :- hermano(X,Z), (padre(Z,Y); madre(Z,Y)), !.
+tios(X,Y) :- hermanos(X,Z), (padre(Z,Y); madre(Z,Y)), !.
 
-tios(X,Y) :- hermanos(X,Z), (padre(Z,Y); madre(Z,Y)).
-
-tia(X,Y) :- hermana(X,Z),(padre(Z,Y); madre(Z,Y)), !.
+tia(X,Y) :- hermanas(X,Z),(padre(Z,Y); madre(Z,Y)), !.
 
 tias(X,Y) :- hermanas(X,Z),(padre(Z,Y); madre(Z,Y)).
 
@@ -93,11 +87,11 @@ sobrina(X,Y) :- hija(X,Z), (hermano(Z,Y); hermana(Z,Y)), !.
 
 sobrinas(X,Y) :- hijas(X,Z), (hermanos(Z,Y); hermanas(Z,Y)).
 
-cunado(X,Y) :- (esposo(X,Z), (hermano(Y,Z); hermana(Z,Y))) ; (hermano(X,Z),(esposo(Z,Y);esposa(Z,Y))), !.
+cunado(X,Y) :- (esposo(X,Z), (hermanos(Y,Z); hermanas(Z,Y))) ; (hermanos(X,Z),(esposo(Z,Y);esposa(Z,Y))), !.
 
 cunados(X,Y) :- (esposo(X,Z), (hermanos(Y,Z); hermanas(Z,Y))) ; (hermanos(X,Z),(esposo(Z,Y);esposa(Z,Y))).
 
-cunada(X,Y) :- (esposa(X,Z), (hermano(Y,Z); hermana(Z,Y))) ; (hermana(X,Z),(esposo(Z,Y);esposa(Z,Y))), !.
+cunada(X,Y) :- (esposa(X,Z), (hermanos(Y,Z); hermanas(Z,Y))) ; (hermanas(X,Z),(esposo(Z,Y);esposa(Z,Y))), !.
 
 cunadas(X,Y) :- (esposa(X,Z), (hermanos(Y,Z); hermanas(Z,Y))) ; (hermanas(X,Z),(esposo(Z,Y);esposa(Z,Y))).
 
