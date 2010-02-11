@@ -42,11 +42,11 @@ esposa(X,Y) :- esposo(Y,X).
 
 persona(X) :- persona(X,masc) ; persona(X,fem).
 
-hermano_padre(X,Y) :- (padre(Z,X),padre(Z,Y)), \+ (madre(W,X), madre(W,Y)), X \= Y.
+her_padre(X,Y) :- (padre(Z,X),padre(Z,Y)), \+ (madre(W,X), madre(W,Y)), X \= Y.
 
-hermano_madre(X,Y) :- \+ (padre(Z,X),padre(Z,Y)), (madre(W,X), madre(W,Y)), X \= Y.
+her_madre(X,Y) :- \+ (padre(Z,X),padre(Z,Y)), (madre(W,X), madre(W,Y)), X \= Y.
 
-hermano_ambos(X,Y) :- (padre(Z,X),padre(Z,Y)), (madre(W,X), madre(W,Y)), X \= Y.
+her_ambos(X,Y) :- (padre(Z,X),padre(Z,Y)), (madre(W,X), madre(W,Y)), X \= Y.
 
 % hermano(X,Y) :- persona(X,masc),((madre(Z,X), madre(Z,Y)) ; (padre(Z,X), padre(Z,Y))), X \= Y .
 
@@ -54,11 +54,7 @@ hermano_ambos(X,Y) :- (padre(Z,X),padre(Z,Y)), (madre(W,X), madre(W,Y)), X \= Y.
 
 hermano(X,Y) :-  persona(X,masc), ( hermano_padre(X,Y) ; hermano_madre(X,Y) ; hermano_ambos(X,Y)).
 
-%hermana(X,Y) :- persona(X,fem),(((madre(Z,X), madre(Z,Y)) , (padre(W,X), padre(W,Y))) ; ((madre(Z,X),madre(Z,Y)), \+ (padre(W,X), padre(W,Y))); ((padre(W,X),padre(W,Y)) , \+ (madre(Z,X),madre(Z,Y)))), X \= Y.
-
-%hermanos(X,Y) :- persona(X,masc),(((madre(Z,X), madre(Z,Y)) , (padre(W,X), padre(W,Y))) ; ((madre(Z,X),madre(Z,Y)), \+ (padre(W,X), padre(W,Y))); ((padre(W,X),padre(W,Y)) , \+ (madre(Z,X),madre(Z,Y)))), X \= Y.
-
-%hermanas(X,Y) :- persona(X,fem),(((madre(Z,X), madre(Z,Y)) , (padre(W,X), padre(W,Y))) ; ((madre(Z,X),madre(Z,Y)), \+ (padre(W,X), padre(W,Y))); ((padre(W,X),padre(W,Y)) , \+ (madre(Z,X),madre(Z,Y)))), X \= Y.
+hermano(X,Y) :-  persona(X,fem), ( her_padre(X,Y) ; her_madre(X,Y) ; her_ambos(X,Y)).
 
 abuelo(X,Y) :- persona(X,masc), padre(X,Z), (padre(Z,Y); madre(Z,Y)).
 
