@@ -2,7 +2,7 @@
 
 match_rel(C,C).
 
-check_rel(C,R) :- match_rel(C,esposa_aux(X,Y)) -> R = esposa(X,Y)
+check_rel(C,R) :- match_rel(C,esposa(X,Y)) -> R = esposa(X,Y)
 
 
 
