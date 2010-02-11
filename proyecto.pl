@@ -41,7 +41,7 @@ esposa(X,Y) :- esposo(Y,X).
 
 persona(X) :- persona(X,masc) ; persona(X,fem).
 
-hermano(X,Y) :- persona(X,masc),((madre(Z,X), madre(Z,Y)) ; (padre(Z,X), padre(Z,Y))), X \= Y.
+hermano(X,Y) :- persona(X,masc),((madre(Z,X), madre(Z,Y)),(padre(Z,X), padre(Z,Y))), not(X == Y).
 
 hermana(X,Y) :- persona(X,fem),((madre(Z,X), madre(Z,Y)) ; (padre(Z,X), padre(Z,Y))), X \= Y, !.
 

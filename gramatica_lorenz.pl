@@ -58,7 +58,7 @@ persona(X) --> [X].
 %%Pregunta con relacion recursiva
 
 % Quien es
-pregunta --> pronom(N) , verbo(N) , articulo(N,G) , terminal(N,G,_X,Y), {write(Y),nl,fail}.
+pregunta --> pronom(N) , verbo(N) , articulo(N,G) , terminal(N,G,_X,Y), {write(Y),nl,fail}. 
 
 % Es verdad
 pregunta --> es_verdad, persona(Y), verbo(N), articulo(N,G),terminal(N,G,_X,Y).
