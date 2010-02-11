@@ -42,11 +42,17 @@ esposa(X,Y) :- esposo(Y,X).
 
 persona(X) :- persona(X,masc) ; persona(X,fem).
 
-hermano(X,Y) :- persona(X,masc),((madre(Z,X), madre(Z,Y)) ; (padre(Z,X), padre(Z,Y))), X \= Y .
+hermano_padre(X,Y) :- (padre(Z,X),padre(Z,Y)), \+ (madre(W,X), madre(W,Y)), X \= Y.
 
-hermana(X,Y) :- persona(X,fem),((madre(Z,X), madre(Z,Y)) ; (padre(Z,X), padre(Z,Y))), X \= Y.
+hermano_madre(X,Y) :- \+ (padre(Z,X),padre(Z,Y)), (madre(W,X), madre(W,Y)), X \= Y.
 
-%hermano(X,Y) :- persona(X,masc),(((madre(Z,X), madre(Z,Y)) , (padre(W,X), padre(W,Y))) ; ((madre(Z,X),madre(Z,Y)), \+ (padre(W,X), padre(W,Y))); ((padre(W,X),padre(W,Y)) , \+ (madre(Z,X),madre(Z,Y)))), X \= Y.
+hermano_ambos(X,Y) :- (padre(Z,X),padre(Z,Y)), (madre(W,X), madre(W,Y)), X \= Y.
+
+% hermano(X,Y) :- persona(X,masc),((madre(Z,X), madre(Z,Y)) ; (padre(Z,X), padre(Z,Y))), X \= Y .
+
+% hermana(X,Y) :- persona(X,fem),((madre(Z,X), madre(Z,Y)) ; (padre(Z,X), padre(Z,Y))), X \= Y.
+
+hermano(X,Y) :-  persona(X,masc), ( hermano_padre(X,Y) ; hermano_madre(X,Y) ; hermano_ambos(X,Y)).
 
 %hermana(X,Y) :- persona(X,fem),(((madre(Z,X), madre(Z,Y)) , (padre(W,X), padre(W,Y))) ; ((madre(Z,X),madre(Z,Y)), \+ (padre(W,X), padre(W,Y))); ((padre(W,X),padre(W,Y)) , \+ (madre(Z,X),madre(Z,Y)))), X \= Y.
 
