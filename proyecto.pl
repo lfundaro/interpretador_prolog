@@ -98,11 +98,7 @@ hermano(X,Y) :- persona(X,masc),((madre(Z,X), madre(Z,Y)),(padre(Z,X), padre(Z,Y
 
 %hermanas(X,Y) :- persona(X,fem),(((madre(Z,X), madre(Z,Y)) , (padre(W,X), padre(W,Y))) ; ((madre(Z,X),madre(Z,Y)), \+ (padre(W,X), padre(W,Y))); ((padre(W,X),padre(W,Y)) , \+ (madre(Z,X),madre(Z,Y)))), X \= Y.
 
-<<<<<<< HEAD
-abuelo(X,Y) :- persona(X,masc), padre(X,Z), (padre(Z,Y) ; madre(Z,Y)).
-=======
 abuelo(X,Y) :- persona(X,masc), padre(X,Z), (padre(Z,Y); madre(Z,Y)).
->>>>>>> 8cd73058eac451efcf9eab53c55c3c4bc119a6f4
 
 abuelos(X,Y) :- persona(X,masc), (padre(X,Z), padre(Z,Y)) ; (padre(X,W), madre(W,Y)).
 
@@ -110,13 +106,7 @@ abuela(X,Y) :- persona(X,fem), madre(X,Z), (padre(Z,Y); madre(Z,Y)).
 
 abuelas(X,Y) :- persona(X,fem), (madre(X,Z), madre(Z,Y)) ; (madre(X,W), padre(W,Y)).
 
-<<<<<<< HEAD
-hijo(X,Y) :- persona(X,masc),(padre(Y,X);madre(Y,X)).
-
-%%hijo(X,Y) :- persona(X,masc),madre(Y,X).
-=======
 hijo(X,Y) :- persona(X,masc),(padre(Y,X); madre(Y,X)).
->>>>>>> 8cd73058eac451efcf9eab53c55c3c4bc119a6f4
 
 hijos(X,Y) :- persona(X,masc),(padre(Y,X); madre(Y,X)).
 
