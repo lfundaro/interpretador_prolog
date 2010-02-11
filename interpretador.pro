@@ -81,10 +81,10 @@ relacion(plural,masculino,A,B,cunados(B,A)) --> [cunados].
 %%Pregunta con relacion recursiva
 
 % Quien es
-pregunta --> pronom(N) , verbo(N) , articulo(N,G) , terminal(N,G,_X,Y,A), {reverse2(A,R), recorrer(R,P)}.
+pregunta --> pronom(N) , verbo(N) , articulo(N,G) , terminal(N,G,_X,_Y,A), {reverse2(A,R), recorrer(R,_P)}.
 
 % Es verdad
-pregunta --> es_verdad, persona(Y), verbo(N), articulo(N,G),terminal(N,G,_X,Y,A).
+pregunta --> es_verdad, persona(Y), verbo(N), articulo(N,G),terminal(N,G,_X,Y,_A),{ recorrer(_R,_P)}.
 
 % Forma sencilla, usada por la pregunta quien es y es verdad.
 terminal(N,G,X,Y,[A]) --> relacion(N,G,X,Y,A), prepos_senc , persona(X) , [?].
@@ -156,13 +156,9 @@ hermano(X,Y) :-  persona(X,masc), ( her_padre(X,Y) ; her_madre(X,Y) ; her_ambos(
 
 hermana(X,Y) :-  persona(X,fem), ( her_padre(X,Y) ; her_madre(X,Y) ; her_ambos(X,Y)).
 
-abuelo(X,Y) :- persona(X,masc), padre(X,Z), (padre(Z,Y); madre(W,Y)).
+abuelo(X,Y) :- persona(X,masc), padre(X,Z), (padre(Z,Y); madre(Z,Y)).
 
-abuelos(X,Y) :- persona(X,masc), (padre(X,Z), padre(Z,Y)) ; (padre(X,W), madre(W,Y)).
-
-abuela(X,Y) :- persona(X,fem), madre(X,Z), (padre(Z,Y); madre(W,Y)).
-
-abuelas(X,Y) :- persona(X,fem), (madre(X,Z), madre(Z,Y)) ; (madre(X,W), padre(W,Y)).
+abuela(X,Y) :- persona(X,fem), madre(X,Z), (padre(Z,Y); madre(Z,Y)).
 
 hijo(X,Y) :- persona(X,masc),(padre(Y,X); madre(Y,X)).
 
@@ -203,51 +199,52 @@ reverse2([],[]).
 reverse2([C|T],L):- reverse2(T,R), concaten(R,[C],L). 
 
 
-recorrer(R,[C|R]) :-
+recorrer([C|D],R) :-
 
 	% Relaciones singulares femeninas.
-	match_rel(C,esposa(Y,X)) -> esposa(Y,X),recorrer(Y,D);
-	match_rel(C,abuela(Y,X)) -> abuela(Y,X),recorrer(Y,D);
-	match_rel(C,madre(Y,X)) -> madre(Y,X),recorrer(Y,D);
-	match_rel(C,hija(Y,X)) -> hija(Y,X),recorrer(Y,D);
-	match_rel(C,nieta(Y,X)) -> nieta(Y,X),recorrer(Y,D);
-	match_rel(C,hermana(Y,X)) -> hermana(Y,X),recorrer(Y,D);
-	match_rel(C,tia(Y,X)) -> tia(Y,X),recorrer(Y,D);
-	match_rel(C,sobrina(Y,X)) -> sobrina(Y,X),recorrer(Y,D);
-	match_rel(C,suegra(Y,X)) -> suegra(Y,X),recorrer(Y,D);
-    match_rel(C,cunada(Y,X)) -> cunada(Y,X),recorrer(Y,D)   ;
-
+	match_rel(C,esposa(Y,X)) -> esposa(Y,X),recorrer(D,Y);
+	match_rel(C,abuela(Y,X)) -> abuela(Y,X),recorrer(D,Y);
+	match_rel(C,madre(Y,X)) -> madre(Y,X),recorrer(D,Y);
+	match_rel(C,hija(Y,X)) -> hija(Y,X),recorrer(D,Y);
+	match_rel(C,nieta(Y,X)) -> nieta(Y,X),recorrer(D,Y);
+	match_rel(C,hermana(Y,X)) -> hermana(Y,X),recorrer(D,Y);
+	match_rel(C,tia(Y,X)) -> tia(Y,X),recorrer(D,Y);
+	match_rel(C,sobrina(Y,X)) -> sobrina(Y,X),recorrer(D,Y);
+	match_rel(C,suegra(Y,X)) -> suegra(Y,X),recorrer(D,Y);
+    match_rel(C,cunada(Y,X)) -> cunada(Y,X),recorrer(D,Y)    ;
+	
 	% Relaciones plurales femeninas.
-	match_rel(C,abuelas(Y,X)) -> abuela(Y,X),recorrer(Y,D)   ;
-	match_rel(C,hijas(Y,X)) -> hija(Y,X),recorrer(Y,D);
-	match_rel(C,nietas(Y,X)) -> nieta(Y,X),recorrer(Y,D);
-	match_rel(C,hermanas(Y,X)) -> hermana(Y,X),recorrer(Y,D);
-	match_rel(C,tias(Y,X)) -> tia(Y,X),recorrer(Y,D);
-	match_rel(C,sobrinas(Y,X)) -> sobrina(Y,X),recorrer(Y,D);
-	match_rel(C,cunadas(Y,X)) -> cunada(Y,X),recorrer(Y,D);
+	match_rel(C,abuelas(Y,X)) -> findall(Z,abuela(Z,X),Y),recorrer(D,Y)   ;
+	match_rel(C,hijas(Y,X)) -> findall(Z,hija(Z,X),Y),recorrer(D,Y);
+	match_rel(C,nietas(Y,X)) -> findall(Z,nieta(Z,X),Y),recorrer(D,Y);
+	match_rel(C,hermanas(Y,X)) -> findall(Z,hermana(Z,X),Y),recorrer(D,Y);
+	match_rel(C,tias(Y,X)) ->findall(Z,tia(Z,X),Y),recorrer(D,Y);
+	match_rel(C,sobrinas(Y,X)) -> findall(Z,sobrina(Z,X),Y),recorrer(D,Y);
+	match_rel(C,cunadas(Y,X)) -> findall(Z,cunada(Z,X),Y),recorrer(D,Y);
 	
 	% Relaciones singulares masculinas.
-	match_rel(C,esposo(Y,X)) -> esposo(Y,X),recorrer(Y,D);
-	match_rel(C,abuelo(Y,X)) -> abuelo(Y,X),recorrer(Y,D);
-	match_rel(C,padre(Y,X)) -> padre(Y,X),recorrer(Y,D);
-	match_rel(C,hijo(Y,X)) ->  hijo(Y,X),recorrer(Y,D);
-	match_rel(C,nieto(Y,X)) -> nieto(Y,X),recorrer(Y,D);
-	match_rel(C,hermano(Y,X)) -> hermano(Y,X),recorrer(Y,D);
-	match_rel(C,tio(Y,X)) -> tio(Y,X),recorrer(Y,D);
-	match_rel(C,sobrino(Y,X)) -> sobrino(Y,X),recorrer(Y,D);
-	match_rel(C,suegro(Y,X)) -> suegro(Y,X),recorrer(Y,D);
-	match_rel(C,cunado(Y,X)) -> cunado(Y,X),recorrer(Y,D);
+	match_rel(C,esposo(Y,X)) -> esposo(Y,X),recorrer(D,Y);
+	match_rel(C,abuelo(Y,X)) -> abuelo(Y,X),recorrer(D,Y);
+	match_rel(C,padre(Y,X)) -> padre(Y,X),recorrer(D,Y);
+	match_rel(C,hijo(Y,X)) ->  hijo(Y,X),recorrer(D,Y);
+	match_rel(C,nieto(Y,X)) -> nieto(Y,X),recorrer(D,Y);
+	match_rel(C,hermano(Y,X)) -> hermano(Y,X),recorrer(D,Y);
+	match_rel(C,tio(Y,X)) -> tio(Y,X),recorrer(D,Y);
+	match_rel(C,sobrino(Y,X)) -> sobrino(Y,X),recorrer(D,Y);
+	match_rel(C,suegro(Y,X)) -> suegro(Y,X),recorrer(D,Y);
+	match_rel(C,cunado(Y,X)) -> cunado(Y,X),recorrer(D,Y);
 	
 	% Relaciones plurales masculinas.
-	match_rel(C,abuelos(Y,X)) -> abuelo(Y,X),recorrer(Y,D);
-	match_rel(C,hijos(Y,X)) -> hijo(Y,X),recorrer(Y,D);
-	match_rel(C,nietos(Y,X)) -> nieto(Y,X),recorrer(Y,D);
-	match_rel(C,hermanos(Y,X)) -> hermano(Y,X),recorrer(Y,D);
-	match_rel(C,tios(Y,X)) -> tio(Y,X),recorrer(Y,D);
-	match_rel(C,sobrinos(Y,X)) -> sobrino(Y,X),recorrer(Y,D);
-    match_rel(C,cunados(Y,X)) -> cunado(Y,X),recorrer(Y,D)  ;
+	match_rel(C,abuelos(Y,X)) -> findall(Z,abuelo(Z,X),Y),recorrer(D,Y);
+	match_rel(C,hijos(Y,X)) ->findall(Z,hijo(Z,X),Y),recorrer(D,Y);
+	match_rel(C,nietos(Y,X)) -> findall(Z,nieto(Z,X),Y),recorrer(D,Y);
+	match_rel(C,hermanos(Y,X)) -> findall(Z,hermano(Z,X),Y),recorrer(D,Y);
+	match_rel(C,tios(Y,X)) -> findall(Z,hermano(Z,X),Y),recorrer(D,Y);
+	match_rel(C,sobrinos(Y,X)) -> findall(Z,sobrino(Z,X),Y),recorrer(D,Y);
+    match_rel(C,cunados(Y,X)) -> findall(Z,cunado(Z,X),Y),recorrer(D,Y)  ;
     true.
 
 recorrer([],R):- write(R).
+
 
 
