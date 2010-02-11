@@ -1,15 +1,13 @@
-% Preguntas permitidas: quien, quienes 
 pronom(singular) --> [quien].
 pronom(plural) --> [quienes].
 es_verdad --> [es],[verdad],[que].
-
-% Verbos permitidos: es, son.
 verbo(singular) --> [es].
 verbo(plural) --> [son].
 articulo(singular,femenino) --> [la].
 articulo(plural,femenino) --> [las].
 articulo(singular,masculino) --> [el].
 articulo(plural,masculino) --> [los].
+
 
 %% %%Relaciones singulares Femeninas.
 relacion(singular,femenino,esposa_aux(Y,X),X,Y) --> [esposa].%% {esposa(Y,X)}.
@@ -55,7 +53,7 @@ relacion(singular,femenino,esposa_aux(Y,X),X,Y) --> [esposa].%% {esposa(Y,X)}.
 %% relacion(plural,masculino,X,Y) --> [sobrinos],{sobrinos(Y,X)}.
 %% relacion(plural,masculino,X,Y) --> [cunados],{cunados(Y,X)}.
 
-% Preposiciones permitidas: de la, de las, del, de los.
+
 prepos_art(singular,femenino) --> [de],[la].
 prepos_art(plural,femenino) --> [de],[las].
 prepos_art(singular,masculino) --> [del].
@@ -69,7 +67,10 @@ persona(X) --> [X].
 % Quien es
 pregunta --> pronom(N) , verbo(N) , articulo(N,G) , terminal(N,G,[L],X,Y). %%{(check_sing(N,singular),print_head(Y),nl,fail)}. %%(write(Y))}. 
 
-pregunta --> pronom(N) , verbo(N) , articulo(N,G) , terminal(N,G,[L],X,Y). %% {check_sing(N,plural),write(Y),nl,fail}.
+%%pregunta --> pronom(N) , verbo(N) , articulo(N,G) , terminal(N,G,[L],X,Y). %% {check_sing(N,plural),write(Y),nl,fail}.
+
+
+pregunta --> pronom(N) , verbo(N) , articulo(N,G) , terminal(N,G,_X,Y), {write(Y),nl,fail}. 
 
 % Es verdad
 pregunta --> es_verdad, persona(Y), verbo(N), articulo(N,G),terminal(N,G,[L],X,Y).
