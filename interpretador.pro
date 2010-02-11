@@ -164,21 +164,21 @@ hijo(X,Y) :- persona(X,masc),(padre(Y,X); madre(Y,X)).
 
 hija(X,Y) :- persona(X,fem),(padre(Y,X); madre(Y,X)).
 
-nieto(X,Y) :- hijos(X,Z), (hijos(Z,Y); hijas(Z,Y)).
+nieto(X,Y) :- hijo(X,Z), (hijo(Z,Y); hija(Z,Y)).
 
-nieta(X,Y) :- hijas(X,Z), (hijos(Z,Y); hijas(Z,Y)).
+nieta(X,Y) :- hija(X,Z), (hijo(Z,Y); hija(Z,Y)).
 
-tio(X,Y) :- hermanos(X,Z), (padre(Z,Y); madre(Z,Y)).
+tio(X,Y) :- hermano(X,Z), (padre(Z,Y); madre(Z,Y)).
 
-tia(X,Y) :- hermanas(X,Z),(padre(Z,Y); madre(Z,Y)).
+tia(X,Y) :- hermana(X,Z),(padre(Z,Y); madre(Z,Y)).
 
-sobrino(X,Y) :- hijos(X,Z), (hermanos(Z,Y); hermanas(Z,Y)).
+sobrino(X,Y) :- hijo(X,Z), (hermano(Z,Y); hermana(Z,Y)).
 
-sobrina(X,Y) :- hijas(X,Z), (hermanos(Z,Y); hermanas(Z,Y)).
+sobrina(X,Y) :- hija(X,Z), (hermano(Z,Y); hermana(Z,Y)).
 
-cunado(X,Y) :- (esposo(X,Z), (hermanos(Y,Z); hermanas(Z,Y))) ; (hermanos(X,Z),(esposos(Z,Y);esposas(Z,Y))).
+cunado(X,Y) :- (esposo(X,Z), (hermano(Y,Z); hermana(Z,Y))) ; (hermano(X,Z),(esposo(Z,Y);esposa(Z,Y))).
 
-cunada(X,Y) :- (esposa(X,Z), (hermanos(Y,Z); hermanas(Z,Y))) ; (hermanas(X,Z),(esposo(Z,Y);esposa(Z,Y))).
+cunada(X,Y) :- (esposa(X,Z), (hermano(Y,Z); hermana(Z,Y))) ; (hermana(X,Z),(esposo(Z,Y);esposa(Z,Y))).
 
 suegro(X,Y) :- padre(X,Z), (esposo(Z,Y); esposa(Z,Y)).
 
@@ -211,7 +211,7 @@ recorrer([C|D],R) :-
 	match_rel(C,tia(Y,X)) -> tia(Y,X),recorrer(D,Y);
 	match_rel(C,sobrina(Y,X)) -> sobrina(Y,X),recorrer(D,Y);
 	match_rel(C,suegra(Y,X)) -> suegra(Y,X),recorrer(D,Y);
-    match_rel(C,cunada(Y,X)) -> cunada(Y,X),recorrer(D,Y)    ;
+	match_rel(C,cunada(Y,X)) -> cunada(Y,X),recorrer(D,Y)    ;
 	
 	% Relaciones plurales femeninas.
 	match_rel(C,abuelas(Y,X)) -> findall(Z,abuela(Z,X),Y),recorrer(D,Y)   ;
@@ -241,8 +241,8 @@ recorrer([C|D],R) :-
 	match_rel(C,hermanos(Y,X)) -> findall(Z,hermano(Z,X),Y),recorrer(D,Y);
 	match_rel(C,tios(Y,X)) -> findall(Z,hermano(Z,X),Y),recorrer(D,Y);
 	match_rel(C,sobrinos(Y,X)) -> findall(Z,sobrino(Z,X),Y),recorrer(D,Y);
-    match_rel(C,cunados(Y,X)) -> findall(Z,cunado(Z,X),Y),recorrer(D,Y)  ;
-    true.
+	match_rel(C,cunados(Y,X)) -> findall(Z,cunado(Z,X),Y),recorrer(D,Y)  ;
+	true.
 
 recorrer([],R):- write(R).
 
