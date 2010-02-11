@@ -1,44 +1,3 @@
-
-%% persona(baldo,masc).
-%% persona(alba,fem).
-%% persona(laura,fem).
-%% persona(joviniano,masc).
-%% persona(roberto,masc).
-%% persona(romina,fem).
-%% persona(lis,fem).
-%% persona(lorenzo,masc).
-%% persona(paola,fem).
-%% persona(carlo,masc).
-%% persona(ignazio,masc).
-%% persona(sara,fem).
-
-%% padre(baldo,roberto).
-%% padre(joviniano,lis).
-%% padre(roberto,romina).
-%% padre(roberto,lorenzo).
-%% padre(roberto,paola).
-%% padre(roberto,carlo).
-%% padre(roberto,ignazio).
-%% padre(roberto,sara).
-%% padre(baldo,andres).
-%% padre(baldo,alberto).
-
-%% madre(alba,roberto).
-%% madre(laura,lis).
-%% madre(lis,romina).
-%% madre(lis,lorenzo).
-%% madre(lis,paola).
-%% madre(lis,carlo).
-%% madre(lis,ignazio).
-%% madre(lis,sara).
-%% madre(alba,alberto).
-%% madre(alba,andres).
-
-%% esposo(baldo,alba).
-%% esposo(roberto,lis).
-%% esposo(joviniano,laura).
-
-
 persona(marion,fem).
 persona(martin,masc).
 persona(marcel,masc).
@@ -83,12 +42,9 @@ esposa(X,Y) :- esposo(Y,X).
 
 persona(X) :- persona(X,masc) ; persona(X,fem).
 
+hermano(X,Y) :- persona(X,masc),((madre(Z,X), madre(Z,Y)) ; (padre(Z,X), padre(Z,Y))), X \= Y .
 
-% hermano(X,Y) :- persona(X,masc),((madre(Z,X), madre(Z,Y)) ; (padre(Z,X), padre(Z,Y))), X \= Y .
-
-% hermana(X,Y) :- persona(X,fem),((madre(Z,X), madre(Z,Y)) ; (padre(Z,X), padre(Z,Y))), X \= Y.
-
-hermano(X,Y) :- persona(X,masc),((madre(Z,X), madre(Z,Y)),(padre(Z,X), padre(Z,Y))), not(X == Y).
+hermana(X,Y) :- persona(X,fem),((madre(Z,X), madre(Z,Y)) ; (padre(Z,X), padre(Z,Y))), X \= Y.
 
 %hermano(X,Y) :- persona(X,masc),(((madre(Z,X), madre(Z,Y)) , (padre(W,X), padre(W,Y))) ; ((madre(Z,X),madre(Z,Y)), \+ (padre(W,X), padre(W,Y))); ((padre(W,X),padre(W,Y)) , \+ (madre(Z,X),madre(Z,Y)))), X \= Y.
 
