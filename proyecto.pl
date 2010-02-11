@@ -1,3 +1,4 @@
+
 persona(marion,fem).
 persona(martin,masc).
 persona(marcel,masc).
@@ -34,8 +35,8 @@ madre(maria,marcel).
 madre(maria,lili).
 madre(flora,maria).
 madre(flora,ana).
-madre(flora,gabriela). 
- 
+madre(flora,gabriela).
+
 esposo(richard,ana).
 esposo(hyatt,lis).
 esposo(arturo,maria).
@@ -103,3 +104,4 @@ cunada(X,Y) :- (esposa(X,Z), (hermano(Y,Z); hermana(Z,Y))) ; (hermana(X,Z),(espo
 suegro(X,Y) :- padre(X,Z), (esposo(Z,Y); esposa(Z,Y)).
 
 suegra(X,Y) :- madre(X,Z), (esposo(Z,Y); esposa(Z,Y)).
+
