@@ -47,7 +47,7 @@ hermana(X,Y) :- persona(X,fem),((madre(Z,X), madre(Z,Y)) ; (padre(Z,X), padre(Z,
 
 hermanos(X,Y) :- persona(X,masc),(((madre(Z,X), madre(Z,Y)) , (padre(W,X), padre(W,Y))) ; ((madre(Z,X),madre(Z,Y)), \+ (padre(W,X), padre(W,Y))); ((padre(W,X),padre(W,Y)) , \+ (madre(Z,X),madre(Z,Y)))), X \= Y.
 
-hermanas(X,Y) :- persona(X,masc),(((madre(Z,X), madre(Z,Y)) , (padre(W,X), padre(W,Y))) ; ((madre(Z,X),madre(Z,Y)), \+ (padre(W,X), padre(W,Y))); ((padre(W,X),padre(W,Y)) , \+ (madre(Z,X),madre(Z,Y)))), X \= Y.
+hermanas(X,Y) :- persona(X,fem),(((madre(Z,X), madre(Z,Y)) , (padre(W,X), padre(W,Y))) ; ((madre(Z,X),madre(Z,Y)), \+ (padre(W,X), padre(W,Y))); ((padre(W,X),padre(W,Y)) , \+ (madre(Z,X),madre(Z,Y)))), X \= Y.
 
 abuelo(X,Y) :- persona(X,masc), padre(X,Z), (padre(Z,Y); madre(Z,Y)), !.
 
