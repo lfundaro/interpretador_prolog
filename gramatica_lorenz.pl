@@ -11,50 +11,49 @@ articulo(plural,femenino) --> [las].
 articulo(singular,masculino) --> [el].
 articulo(plural,masculino) --> [los].
 
-%Relaciones singulares:
-%Femeninas.
-relacion(singular,femenino,X,Y) --> [esposa], {esposa(Y,X)}.
-relacion(singular,femenino,X,Y) --> [abuela],{abuela(Y,X)}.
-relacion(singular,femenino,X,Y) --> [madre],{madre(Y,X)}.
-relacion(singular,femenino,X,Y) --> [hija],{hija(Y,X)}.
-relacion(singular,femenino,X,Y) --> [nieta],{nieta(Y,X)}.
-relacion(singular,femenino,X,Y) --> [hermana],{hermana(Y,X)}.
-relacion(singular,femenino,X,Y) --> [tia],{tia(Y,X)}.
-relacion(singular,femenino,X,Y) --> [sobrina],{sobrina(Y,X)}.
-relacion(singular,femenino,X,Y) --> [suegra],{suegra(Y,X)}.
-relacion(singular,femenino,X,Y) --> [cunada],{cunada(Y,X)}.
+%% %%Relaciones singulares Femeninas.
+relacion(singular,femenino,esposa_aux(Y,X),X,Y) --> [esposa].%% {esposa(Y,X)}.
+%% relacion(singular,femenino,X,Y) --> [abuela],{abuela(Y,X)}.
+%% relacion(singular,femenino,X,Y) --> [madre],{madre(Y,X)}.
+%% relacion(singular,femenino,X,Y) --> [hija],{hija(Y,X)}.
+%% relacion(singular,femenino,X,Y) --> [nieta],{nieta(Y,X)}.
+%% relacion(singular,femenino,X,Y) --> [hermana],{hermana(Y,X)}.
+%% relacion(singular,femenino,X,Y) --> [tia],{tia(Y,X)}.
+%% relacion(singular,femenino,X,Y) --> [sobrina],{sobrina(Y,X)}.
+%% relacion(singular,femenino,X,Y) --> [suegra],{suegra(Y,X)}.
+%% relacion(singular,femenino,X,Y) --> [cunada],{cunada(Y,X)}.
 
-%Masculinas.
-relacion(singular,masculino,X,Y) --> [esposo],{esposo(Y,X)}.
-relacion(singular,masculino,X,Y) --> [abuelo],{abuelo(Y,X)}.
-relacion(singular,masculino,X,Y) --> [padre],{padre(Y,X)}.
-relacion(singular,masculino,X,Y) --> [hijo],{hijo(Y,X)}.
-relacion(singular,masculino,X,Y) --> [nieto],{nieto(Y,X)}.
-relacion(singular,masculino,X,Y) --> [hermano],{hermano(Y,X)}.
-relacion(singular,masculino,X,Y) --> [tio],{tio(Y,X)}.
-relacion(singular,masculino,X,Y) --> [sobrino],{sobrino(Y,X)}.
-relacion(singular,masculino,X,Y) --> [suegro],{suegro(Y,X)}.
-relacion(singular,masculino,X,Y) --> [cunado],{cunado(Y,X)}.
+%% %Masculinas.
+%% relacion(singular,masculino,X,Y) --> [esposo],{esposo(Y,X)}.
+%% relacion(singular,masculino,X,Y) --> [abuelo],{findall(Y,abuelo(Y,X),Y)}.
+%% relacion(singular,masculino,X,Y) --> [padre],{padre(Y,X)}.
+%% relacion(singular,masculino,X,Y) --> [hijo],{setof(Y,hijo(Y,X),Y)}.
+%% relacion(singular,masculino,X,Y) --> [nieto],{nieto(Y,X)}.
+%% relacion(singular,masculino,X,Y) --> [hermano],{hermano(Y,X)}.
+%% relacion(singular,masculino,X,Y) --> [tio],{tio(Y,X)}.
+%% relacion(singular,masculino,X,Y) --> [sobrino],{sobrino(Y,X)}.
+%% relacion(singular,masculino,X,Y) --> [suegro],{suegro(Y,X)}.
+%% relacion(singular,masculino,X,Y) --> [cunado],{cunado(Y,X)}.
 
-%Relaciones Plurales:
+%% %Relaciones Plurales:
 
-% Femeninas.
-relacion(plural,femenino,X,Y) --> [abuelas],{abuelas(Y,X)}.
-relacion(plural,femenino,X,Y) --> [hijas],{hijas(Y,X)}.
-relacion(plural,femenino,X,Y) --> [nietas],{nietas(Y,X)}.
-relacion(plural,femenino,X,Y) --> [hermanas],{hermanas(Y,X)}.
-relacion(plural,femenino,X,Y) --> [tias],{tias(Y,X)}.
-relacion(plural,femenino,X,Y) --> [sobrinas],{sobrinas(Y,X)}.
-relacion(plural,femenino,X,Y) --> [cunadas],{cunadas(Y,X)}.
+%% % Femeninas.
+%% relacion(plural,femenino,X,Y) --> [abuelas],{abuelas(Y,X)}.
+%% relacion(plural,femenino,X,Y) --> [hijas],{hijas(Y,X)}.
+%% relacion(plural,femenino,X,Y) --> [nietas],{nietas(Y,X)}.
+%% relacion(plural,femenino,X,Y) --> [hermanas],{hermanas(Y,X)}.
+%% relacion(plural,femenino,X,Y) --> [tias],{tias(Y,X)}.
+%% relacion(plural,femenino,X,Y) --> [sobrinas],{sobrinas(Y,X)}.
+%% relacion(plural,femenino,X,Y) --> [cunadas],{cunadas(Y,X)}.
 
-% Masculinos.
-relacion(plural,masculino,X,Y) --> [abuelos],{abuelos(Y,X)}.
-relacion(plural,masculino,X,Y) --> [hijos],{hijos(Y,X)}.
-relacion(plural,masculino,X,Y) --> [nietos],{nietos(Y,X)}.
-relacion(plural,masculino,X,Y) --> [hermanos],{hermanos(Y,X)}.
-relacion(plural,masculino,X,Y) --> [tios],{tios(Y,X)}.
-relacion(plural,masculino,X,Y) --> [sobrinos],{sobrinos(Y,X)}.
-relacion(plural,masculino,X,Y) --> [cunados],{cunados(Y,X)}.
+%% % Masculinos.
+%% relacion(plural,masculino,X,Y) --> [abuelos],{abuelos(Y,X)}.
+%% relacion(plural,masculino,X,Y) --> [hijos],{setof(Y,hijos(Y,X),Y)}.
+%% relacion(plural,masculino,X,Y) --> [nietos],{nietos(Y,X)}.
+%% relacion(plural,masculino,X,Y) --> [hermanos],{hermanos(Y,X)}.
+%% relacion(plural,masculino,X,Y) --> [tios],{tios(Y,X)}.
+%% relacion(plural,masculino,X,Y) --> [sobrinos],{sobrinos(Y,X)}.
+%% relacion(plural,masculino,X,Y) --> [cunados],{cunados(Y,X)}.
 
 % Preposiciones permitidas: de la, de las, del, de los.
 prepos_art(singular,femenino) --> [de],[la].
@@ -68,14 +67,18 @@ persona(X) --> [X].
 %%Pregunta con relacion recursiva
 
 % Quien es
-pregunta --> pronom(N) , verbo(N) , articulo(N,G) , terminal(N,G,_X,Y), {write(Y),nl,fail}. 
+pregunta --> pronom(N) , verbo(N) , articulo(N,G) , terminal(N,G,[L],X,Y). %%{(check_sing(N,singular),print_head(Y),nl,fail)}. %%(write(Y))}. 
+
+pregunta --> pronom(N) , verbo(N) , articulo(N,G) , terminal(N,G,[L],X,Y). %% {check_sing(N,plural),write(Y),nl,fail}.
 
 % Es verdad
-pregunta --> es_verdad, persona(Y), verbo(N), articulo(N,G),terminal(N,G,_X,Y).
+pregunta --> es_verdad, persona(Y), verbo(N), articulo(N,G),terminal(N,G,[L],X,Y).
 
 % Forma sencilla
-terminal(N,G,X,Y) --> relacion(N,G,X,Y), prepos_senc , persona(X) , [?].
+terminal(N,G,[L],X,Y) --> relacion(N,G,[L],X,Y), prepos_senc , persona(X) , [?].
 
 % Forma recursiva 
-terminal(N,G,X,Y) --> relacion(N,G,W,Y) , prepos_art(Nu,Ge), terminal(Nu,Ge,X,W).
+terminal(N,G,[L],X,Y) --> relacion(N,G,W,X,Y) , prepos_art(Nu,Ge), terminal(Nu,Ge,X,W).
+
+
 
